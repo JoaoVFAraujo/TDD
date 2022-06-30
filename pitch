@@ -1,0 +1,112 @@
+---
+title: "9º Workshop - Test Driven Development"
+output: html_notebook
+---
+
+## Autor
+Nome: Joao Victor
+
+## O porquê testar ?
+
+1. Garantimento
+2. Bugs
+
+## Maneira mais antiquada
+
+1. Trabalho manual
+    * Variação de Plataformas
+2. "Funciona na minha maquina"
+3. Fim do trabalho manual
+
+| IDE | Descrição |
+|:---:|:---------:|
+| `Selenium` | É uma ferramenta para testar aplicações  web pelo browser de forma automatizada. Selenium se refere ao Acceptance Testing (ou functional testing) que involve rodar testes num sistema finalizado. Os testes rodam diretamente num browser, exatamente como o usuário faria. |
+
+## O que é teste Automatizado ?
+
+É o uso de meios automáticos para se realizar uma determinada atividade.
+
+1. Programa testando programa
+2. Perdendo tempo X Ganhando tempo
+3. Bateria de testes
+4. "Execução de 10.000 testes em 25 segundos em um Mac" - `Mauricio Aniche` doutor em Engenharia de Software USP
+
+## Tipo de testes
+
+| Teste | Descrição |
+|:------|:---------:|
+| Teste de performance |  É o tipo de teste realizado para se verificar o tempo de resposta de uma aplicação |
+| Teste de Carga | É usado para verificar o limite de dados processados pelo software até que ele não consiga mais processa-lo |
+| Teste de sistema | É uma fase do processo de teste de software e de hardware em que o sistema já completamente integrado |
+
+## Teste de Unidade & Teste de Integração 
+
+1. Qual a diferença ?
+2. Qual mais difícil ?
+
+## TDD (Test Driven Development) 
+
+O TDD é uma metodologia de desenvolvimento baseada em testes. A ideia principal é inverter a sequência "tradicional" de desenvolvimento colocando o teste em primeiro lugar, antes da implementação.
+
+> O TDD é igual uma folha de rascunho, pode brincar à vontade, se não gostou joga fora e começa de novo. O seu teste é uma folha de rascunho <div align="right">- Juan Lopes </div>
+
+## Usando PHPUNit: Criado o arquivo _PHPNativeElementsTest.php_ dentro do diretório tests
+
+```{php, echo=TRUE, fig.height=3, fig.width=4, message=FALSE, warning=FALSE}
+use PHPUnit_Framework_TestCase as PHPUnit;
+
+class PHPNativeElementsTest extends PHPUnit{
+            
+    public function setUP(){
+        /*
+            Parâmetros de inicialização
+
+            Executando antes de cada um dos testes da classe
+        */
+    }
+
+    public function tearDown(){
+        /*
+            Parâmetros de finalização
+
+            Executando após a finalização de cada um dos testes de classe
+        */
+    }
+}
+```
+## Fazendo o primeiro teste passar
+
+```{php, echo=TRUE, fig.height=3, fig.width=4, message=FALSE, warning=FALSE}
+use PHPUnit_Framework_TestCase as PHPUnit;
+use Application\NativeElements\Math;
+
+class PHPNativeElementsTest extends PHPUnit{
+    
+    protected $math;
+
+    public function setUP(){
+        $this->math = new Math;
+    }
+
+    public function testOperacaoMatematica(){
+        $this->assertEqual(3, $this->math->sum(1, 2), "Não somou corretamente");
+    }
+
+    public function tearDown(){
+        
+    }
+}
+```
+
+## Executando o arquivo Math
+
+```{php, echo=TRUE, fig.height=3, fig.width=4, message=FALSE, warning=FALSE}
+namespace Application\NativeElements;
+
+class Math{
+    
+    public function sum($PrimeiroValor, $SegundoValor){
+        return $PrimeiroValor + $SegundoValor;
+    }
+}
+```
